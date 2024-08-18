@@ -6,9 +6,9 @@ from gtts import gTTS
 import tempfile
 from pydub import AudioSegment
 
-# Set up Groq API key
-os.environ['GROQ_API_KEY'] = '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'
-groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
+# Load Groq API key from Streamlit secrets
+groq_api_key = st.secrets["groq"]["api_key"]
+groq_client = Groq(api_key=groq_api_key)
 
 # Load Whisper model
 whisper_model = whisper.load_model("base")
@@ -57,4 +57,3 @@ if uploaded_file is not None:
 
         # Play response audio
         st.audio(response_audio, format="audio/mp3")
-
